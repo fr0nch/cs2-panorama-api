@@ -1,0 +1,231 @@
+{
+	"$schema": "https://raw.githubusercontent.com/untrustedmodders/plugify/refs/heads/main/schemas/plugin.schema.json",
+	"version": "0.1.0",
+	"name": "cs2_panorama_api",
+	"description": "Bridge to CS Script for controlling custom_hud_layout from plugins in any language",
+	"author": "Fr4nch",
+	"website": "https://github.com/fr0nch",
+	"license": "GPLv3",
+	"entry": "cs2_panorama_api.PanoramaAPI",
+	"platforms": [],
+	"language": "javascript",
+	"dependencies": [
+		{
+			"name": "s2sdk"
+		}
+	],
+	"methods": [
+		{
+			"name": "IsCsScriptReady",
+			"description": "Checks whether the CS Script system has come up and the plugin is connected to it.",
+			"funcName": "IsCsScriptReady",
+			"paramTypes": [],
+			"retType": {
+				"type": "bool",
+				"description": "True if Instance is available."
+			}
+		},
+		{
+			"name": "CreateCustomHud",
+			"description": "Creates a custom_hud_layout entity with the given Panorama layout. cs_script cannot spawn entities, so creation goes through s2sdk.",
+			"funcName": "CreateCustomHud",
+			"paramTypes": [
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name (targetname) used for all further calls to this hud."
+				},
+				{
+					"name": "layoutResource",
+					"type": "string",
+					"ref": false,
+					"description": "Path to the Panorama layout (.xml), declared as a resource in the session manifest."
+				}
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if the engine doesn't know the custom_hud_layout class."
+			}
+		},
+		{
+			"name": "RemoveCustomHud",
+			"description": "Removes a previously created custom_hud_layout.",
+			"funcName": "RemoveCustomHud",
+			"paramTypes": [
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				}
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if no hud with this name was created by this plugin."
+			}
+		},
+		{
+			"name": "HideCustomHudFromOtherPlayers",
+			"description": "Hides the hud entity from all players except the owner, at the transmit/PVS level — a stronger guarantee than a CSS class, which only hides the panel on clients the entity is still transmitted to. (s2sdk.HideTransmitEntityFromOtherPlayers)",
+			"funcName": "HideCustomHudFromOtherPlayers",
+			"paramTypes": [
+				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
+				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "The owner player slot who will still see the entity." }
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if no hud with this name was created by this plugin."
+			}
+		},
+		{
+			"name": "SetHudHasClass",
+			"description": "Set if a panel has a class. Applies to all players. Omit `hasClass` to revert to the original value. (CustomHudLayout.SetHasClass)",
+			"funcName": "SetHudHasClass",
+			"paramTypes": [
+				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
+				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
+				{ "name": "className", "type": "string", "ref": false, "description": "CSS class." },
+				{ "name": "hasClass", "type": "bool", "ref": false, "description": "True to add the class, false to remove it." }
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if the entity isn't found or CS Script isn't ready."
+			}
+		},
+		{
+			"name": "SetHudDialogVariable",
+			"description": "Set the value of a dialog variable. Applies to all players. In the layout it's read as text=\"{s:variableName}\". (CustomHudLayout.SetDialogVariableString)",
+			"funcName": "SetHudDialogVariable",
+			"paramTypes": [
+				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
+				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
+				{ "name": "variableName", "type": "string", "ref": false, "description": "Variable name." },
+				{ "name": "value", "type": "string", "ref": false, "description": "Value to display." }
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if the entity isn't found or CS Script isn't ready."
+			}
+		},
+		{
+			"name": "SetHudHasClassForPlayer",
+			"description": "Set if a panel has a class for a single player. Will override the all player value. Omit `hasClass` to defer to the all player value. (CustomHudLayout.SetHasClassForPlayer)",
+			"funcName": "SetHudHasClassForPlayer",
+			"paramTypes": [
+				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
+				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot the override applies to." },
+				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
+				{ "name": "className", "type": "string", "ref": false, "description": "CSS class." },
+				{ "name": "hasClass", "type": "bool", "ref": false, "description": "True to add the class, false to remove it." }
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if the entity isn't found or CS Script isn't ready."
+			}
+		},
+		{
+			"name": "SetHudDialogVariableForPlayer",
+			"description": "Set the value of a dialog variable for a single player. Will override the all player value. Omit `value` to defer to the all player value. If no all player value has been set, the value will be an empty string. (CustomHudLayout.SetDialogVariableStringForPlayer)",
+			"funcName": "SetHudDialogVariableForPlayer",
+			"paramTypes": [
+				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
+				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot the override applies to." },
+				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
+				{ "name": "variableName", "type": "string", "ref": false, "description": "Variable name." },
+				{ "name": "value", "type": "string", "ref": false, "description": "Value to display." }
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if the entity isn't found or CS Script isn't ready."
+			}
+		},
+		{
+			"name": "SetHudInputCapture",
+			"description": "Set to true to force a player into cursor mode and enable click detection on the panels of this hud. Set a callback with OnHudClicked_Register to listen for clicks. Multiple huds can have input captured at a time. Players will get movement control back once all huds have disabled input capture. (CustomHudLayout.SetInputCaptureEnabled)",
+			"funcName": "SetHudInputCapture",
+			"paramTypes": [
+				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
+				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot." },
+				{ "name": "enabled", "type": "bool", "ref": false, "description": "True to capture input, false to release control." }
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if the entity isn't found or CS Script isn't ready."
+			}
+		},
+		{
+			"name": "IsHudInputCaptureEnabled",
+			"description": "Get if this hud is capturing input for a player. (CustomHudLayout.IsInputCaptureEnabled)",
+			"funcName": "IsHudInputCaptureEnabled",
+			"paramTypes": [
+				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
+				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot." }
+			],
+			"retType": {
+				"type": "bool",
+				"description": "False if the entity isn't found, CS Script isn't ready, or input isn't captured."
+			}
+		},
+		{
+			"name": "OnHudClicked_Register",
+			"description": "Subscribes to button clicks on all huds created via CreateCustomHud. Replaces a separate cs_script relay and ServerCommand: the click arrives directly in this plugin through Instance.OnCustomHudClicked.",
+			"funcName": "OnHudClicked_Register",
+			"paramTypes": [
+				{
+					"name": "callback",
+					"type": "function",
+					"ref": false,
+					"description": "Called on every click.",
+					"prototype": {
+						"name": "OnHudClickedCallback",
+						"funcName": "OnHudClickedCallback",
+						"description": "A hud button click.",
+						"paramTypes": [
+							{ "name": "playerSlot", "type": "int32", "description": "Slot of the player who clicked." },
+							{ "name": "name", "type": "string", "description": "Hud name passed to CreateCustomHud." },
+							{ "name": "buttonId", "type": "string", "description": "The id attribute of the clicked button in the layout." }
+						],
+						"retType": {
+							"type": "void",
+							"description": ""
+						}
+					}
+				}
+			],
+			"retType": {
+				"type": "void"
+			}
+		},
+		{
+			"name": "OnHudClicked_Unregister",
+			"description": "Removes a callback previously added with OnHudClicked_Register.",
+			"funcName": "OnHudClicked_Unregister",
+			"paramTypes": [
+				{
+					"name": "callback",
+					"type": "function",
+					"ref": false,
+					"description": "The exact callback reference passed to OnHudClicked_Register.",
+					"prototype": {
+						"name": "OnHudClickedCallback",
+						"funcName": "OnHudClickedCallback",
+						"description": "A hud button click.",
+						"paramTypes": [
+							{ "name": "playerSlot", "type": "int32", "description": "Slot of the player who clicked." },
+							{ "name": "name", "type": "string", "description": "Hud name passed to CreateCustomHud." },
+							{ "name": "buttonId", "type": "string", "description": "The id attribute of the clicked button in the layout." }
+						],
+						"retType": {
+							"type": "void",
+							"description": ""
+						}
+					}
+				}
+			],
+			"retType": {
+				"type": "void"
+			}
+		}
+	]
+}
