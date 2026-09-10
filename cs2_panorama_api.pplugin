@@ -1,6 +1,6 @@
 {
 	"$schema": "https://raw.githubusercontent.com/untrustedmodders/plugify/refs/heads/main/schemas/plugin.schema.json",
-	"version": "0.2.0",
+	"version": "0.2.2",
 	"name": "cs2_panorama_api",
 	"description": "Bridge to CS Script for controlling custom_hud_layout from plugins in any language",
 	"author": "Fr4nch",
@@ -20,9 +20,21 @@
 			"funcName": "OnHudClickedCallback",
 			"description": "A hud button click. Called when a button in a CustomHudLayout is clicked.",
 			"paramTypes": [
-				{ "name": "playerSlot", "type": "int32", "description": "Slot of the player who clicked." },
-				{ "name": "name", "type": "string", "description": "Hud name passed to CreateCustomHud." },
-				{ "name": "buttonId", "type": "string", "description": "The id attribute of the clicked button in the layout." }
+				{
+					"name": "playerSlot",
+					"type": "int32",
+					"description": "Slot of the player who clicked."
+				},
+				{
+					"name": "name",
+					"type": "string",
+					"description": "Hud name passed to CreateCustomHud."
+				},
+				{
+					"name": "buttonId",
+					"type": "string",
+					"description": "The id attribute of the clicked button in the layout."
+				}
 			],
 			"retType": {
 				"type": "void"
@@ -88,8 +100,18 @@
 			"description": "Hides the hud entity from all players except the owner, at the transmit/PVS level — a stronger guarantee than a CSS class, which only hides the panel on clients the entity is still transmitted to. (s2sdk.HideTransmitEntityFromOtherPlayers)",
 			"funcName": "HideCustomHudFromOtherPlayers",
 			"paramTypes": [
-				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
-				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "The owner player slot who will still see the entity." }
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				},
+				{
+					"name": "playerSlot",
+					"type": "int32",
+					"ref": false,
+					"description": "The owner player slot who will still see the entity."
+				}
 			],
 			"retType": {
 				"type": "bool",
@@ -102,10 +124,30 @@
 			"description": "Set if a panel has a class. Applies to all players. Omit `hasClass` to revert to the original value. (CustomHudLayout.SetHasClass)",
 			"funcName": "SetHudHasClass",
 			"paramTypes": [
-				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
-				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
-				{ "name": "className", "type": "string", "ref": false, "description": "CSS class." },
-				{ "name": "hasClass", "type": "bool", "ref": false, "description": "True to add the class, false to remove it." }
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				},
+				{
+					"name": "panelId",
+					"type": "string",
+					"ref": false,
+					"description": "The panel's id attribute in the layout."
+				},
+				{
+					"name": "className",
+					"type": "string",
+					"ref": false,
+					"description": "CSS class."
+				},
+				{
+					"name": "hasClass",
+					"type": "bool",
+					"ref": false,
+					"description": "True to add the class, false to remove it."
+				}
 			],
 			"retType": {
 				"type": "bool",
@@ -118,10 +160,30 @@
 			"description": "Set the value of a dialog variable. Applies to all players. In the layout it's read as text=\"{s:variableName}\". (CustomHudLayout.SetDialogVariableString)",
 			"funcName": "SetHudDialogVariable",
 			"paramTypes": [
-				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
-				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
-				{ "name": "variableName", "type": "string", "ref": false, "description": "Variable name." },
-				{ "name": "value", "type": "string", "ref": false, "description": "Value to display." }
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				},
+				{
+					"name": "panelId",
+					"type": "string",
+					"ref": false,
+					"description": "The panel's id attribute in the layout."
+				},
+				{
+					"name": "variableName",
+					"type": "string",
+					"ref": false,
+					"description": "Variable name."
+				},
+				{
+					"name": "value",
+					"type": "string",
+					"ref": false,
+					"description": "Value to display."
+				}
 			],
 			"retType": {
 				"type": "bool",
@@ -134,11 +196,36 @@
 			"description": "Set if a panel has a class for a single player. Will override the all player value. Omit `hasClass` to defer to the all player value. (CustomHudLayout.SetHasClassForPlayer)",
 			"funcName": "SetHudHasClassForPlayer",
 			"paramTypes": [
-				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
-				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot the override applies to." },
-				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
-				{ "name": "className", "type": "string", "ref": false, "description": "CSS class." },
-				{ "name": "hasClass", "type": "bool", "ref": false, "description": "True to add the class, false to remove it." }
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				},
+				{
+					"name": "playerSlot",
+					"type": "int32",
+					"ref": false,
+					"description": "Player slot the override applies to."
+				},
+				{
+					"name": "panelId",
+					"type": "string",
+					"ref": false,
+					"description": "The panel's id attribute in the layout."
+				},
+				{
+					"name": "className",
+					"type": "string",
+					"ref": false,
+					"description": "CSS class."
+				},
+				{
+					"name": "hasClass",
+					"type": "bool",
+					"ref": false,
+					"description": "True to add the class, false to remove it."
+				}
 			],
 			"retType": {
 				"type": "bool",
@@ -151,11 +238,36 @@
 			"description": "Set the value of a dialog variable for a single player. Will override the all player value. Omit `value` to defer to the all player value. If no all player value has been set, the value will be an empty string. (CustomHudLayout.SetDialogVariableStringForPlayer)",
 			"funcName": "SetHudDialogVariableForPlayer",
 			"paramTypes": [
-				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
-				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot the override applies to." },
-				{ "name": "panelId", "type": "string", "ref": false, "description": "The panel's id attribute in the layout." },
-				{ "name": "variableName", "type": "string", "ref": false, "description": "Variable name." },
-				{ "name": "value", "type": "string", "ref": false, "description": "Value to display." }
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				},
+				{
+					"name": "playerSlot",
+					"type": "int32",
+					"ref": false,
+					"description": "Player slot the override applies to."
+				},
+				{
+					"name": "panelId",
+					"type": "string",
+					"ref": false,
+					"description": "The panel's id attribute in the layout."
+				},
+				{
+					"name": "variableName",
+					"type": "string",
+					"ref": false,
+					"description": "Variable name."
+				},
+				{
+					"name": "value",
+					"type": "string",
+					"ref": false,
+					"description": "Value to display."
+				}
 			],
 			"retType": {
 				"type": "bool",
@@ -168,9 +280,24 @@
 			"description": "Set to true to force a player into cursor mode and enable click detection on the panels of this hud. Set a callback with OnHudClicked_Register to listen for clicks. Multiple huds can have input captured at a time. Players will get movement control back once all huds have disabled input capture. (CustomHudLayout.SetInputCaptureEnabled)",
 			"funcName": "SetHudInputCapture",
 			"paramTypes": [
-				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
-				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot." },
-				{ "name": "enabled", "type": "bool", "ref": false, "description": "True to capture input, false to release control." }
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				},
+				{
+					"name": "playerSlot",
+					"type": "int32",
+					"ref": false,
+					"description": "Player slot."
+				},
+				{
+					"name": "enabled",
+					"type": "bool",
+					"ref": false,
+					"description": "True to capture input, false to release control."
+				}
 			],
 			"retType": {
 				"type": "bool",
@@ -183,8 +310,18 @@
 			"description": "Get if this hud is capturing input for a player. (CustomHudLayout.IsInputCaptureEnabled)",
 			"funcName": "IsHudInputCaptureEnabled",
 			"paramTypes": [
-				{ "name": "name", "type": "string", "ref": false, "description": "Name passed to CreateCustomHud." },
-				{ "name": "playerSlot", "type": "int32", "ref": false, "description": "Player slot." }
+				{
+					"name": "name",
+					"type": "string",
+					"ref": false,
+					"description": "Name passed to CreateCustomHud."
+				},
+				{
+					"name": "playerSlot",
+					"type": "int32",
+					"ref": false,
+					"description": "Player slot."
+				}
 			],
 			"retType": {
 				"type": "bool",
