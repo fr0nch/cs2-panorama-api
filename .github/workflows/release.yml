@@ -31,13 +31,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Determine plugin name
+        id: plugin
+        run: |
+          FILE=$(find . -maxdepth 1 -name '*.pplugin' -printf '%f\n')
+          echo "name=${FILE%.pplugin}" >> "$GITHUB_OUTPUT"
+
+      - name: Set manifest version
+        run: |
+          VERSION="${{ needs.release-please.outputs.tag_name }}"
+          VERSION="${VERSION#v}"
+          jq --arg v "$VERSION" '.version = $v' "${{ steps.plugin.outputs.name }}.pplugin" > tmp.json
+          mv tmp.json "${{ steps.plugin.outputs.name }}.pplugin"
+
       - name: Package plugin
         run: |
-          mkdir -p dist
-          zip -j "dist/cs2_panorama_api-${{ needs.release-please.outputs.tag_name }}.zip" cs2_panorama_api.mjs cs2_panorama_api.pplugin
+          mkdir -p "dist/${{ steps.plugin.outputs.name }}"
+          cp "${{ steps.plugin.outputs.name }}.mjs" "${{ steps.plugin.outputs.name }}.pplugin" "dist/${{ steps.plugin.outputs.name }}/"
+          (cd dist && zip -r "${{ steps.plugin.outputs.name }}-${{ needs.release-please.outputs.tag_name }}.zip" "${{ steps.plugin.outputs.name }}")
 
       - name: Upload release asset
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "${{ needs.release-please.outputs.tag_name }}" "dist/cs2_panorama_api-${{ needs.release-please.outputs.tag_name }}.zip"
+          gh release upload "${{ needs.release-please.outputs.tag_name }}" \
+            "dist/${{ steps.plugin.outputs.name }}-${{ needs.release-please.outputs.tag_name }}.zip"
