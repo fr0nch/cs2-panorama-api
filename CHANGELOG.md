@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/fr0nch/cs2-panorama-api/compare/v0.2.0...v0.2.1) (2026-09-10)
+
+
+### Bug Fixes
+
+* release ([caf0821](https://github.com/fr0nch/cs2-panorama-api/commit/caf08215685373dd84cb17877e88459e3c036ffc))
+
 ## [0.2.0](https://github.com/fr0nch/cs2-panorama-api/compare/v0.1.0...v0.2.0) (2026-09-10)
 
 
