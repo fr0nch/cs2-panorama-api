@@ -37,13 +37,6 @@ jobs:
           FILE=$(find . -maxdepth 1 -name '*.pplugin' -printf '%f\n')
           echo "name=${FILE%.pplugin}" >> "$GITHUB_OUTPUT"
 
-      - name: Set manifest version
-        run: |
-          VERSION="${{ needs.release-please.outputs.tag_name }}"
-          VERSION="${VERSION#v}"
-          jq --arg v "$VERSION" '.version = $v' "${{ steps.plugin.outputs.name }}.pplugin" > tmp.json
-          mv tmp.json "${{ steps.plugin.outputs.name }}.pplugin"
-
       - name: Package plugin
         run: |
           mkdir -p "dist/${{ steps.plugin.outputs.name }}"
