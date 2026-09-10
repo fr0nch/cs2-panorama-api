@@ -14,6 +14,21 @@
 			"name": "s2sdk"
 		}
 	],
+	"prototypes": [
+		{
+			"name": "OnHudClickedCallback",
+			"funcName": "OnHudClickedCallback",
+			"description": "A hud button click. Called when a button in a CustomHudLayout is clicked.",
+			"paramTypes": [
+				{ "name": "playerSlot", "type": "int32", "description": "Slot of the player who clicked." },
+				{ "name": "name", "type": "string", "description": "Hud name passed to CreateCustomHud." },
+				{ "name": "buttonId", "type": "string", "description": "The id attribute of the clicked button in the layout." }
+			],
+			"retType": {
+				"type": "void"
+			}
+		}
+	],
 	"methods": [
 		{
 			"name": "IsCsScriptReady",
@@ -23,7 +38,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "True if Instance is available."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "CreateCustomHud",
@@ -46,7 +62,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if the engine doesn't know the custom_hud_layout class."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "RemoveCustomHud",
@@ -63,7 +80,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if no hud with this name was created by this plugin."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "HideCustomHudFromOtherPlayers",
@@ -76,7 +94,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if no hud with this name was created by this plugin."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "SetHudHasClass",
@@ -91,7 +110,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if the entity isn't found or CS Script isn't ready."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "SetHudDialogVariable",
@@ -106,7 +126,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if the entity isn't found or CS Script isn't ready."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "SetHudHasClassForPlayer",
@@ -122,7 +143,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if the entity isn't found or CS Script isn't ready."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "SetHudDialogVariableForPlayer",
@@ -138,7 +160,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if the entity isn't found or CS Script isn't ready."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "SetHudInputCapture",
@@ -152,7 +175,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if the entity isn't found or CS Script isn't ready."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "IsHudInputCaptureEnabled",
@@ -165,7 +189,8 @@
 			"retType": {
 				"type": "bool",
 				"description": "False if the entity isn't found, CS Script isn't ready, or input isn't captured."
-			}
+			},
+			"group": "CustomHudLayout"
 		},
 		{
 			"name": "OnHudClicked_Register",
@@ -177,25 +202,13 @@
 					"type": "function",
 					"ref": false,
 					"description": "Called on every click.",
-					"prototype": {
-						"name": "OnHudClickedCallback",
-						"funcName": "OnHudClickedCallback",
-						"description": "A hud button click.",
-						"paramTypes": [
-							{ "name": "playerSlot", "type": "int32", "description": "Slot of the player who clicked." },
-							{ "name": "name", "type": "string", "description": "Hud name passed to CreateCustomHud." },
-							{ "name": "buttonId", "type": "string", "description": "The id attribute of the clicked button in the layout." }
-						],
-						"retType": {
-							"type": "void",
-							"description": ""
-						}
-					}
+					"prototype": "OnHudClickedCallback"
 				}
 			],
 			"retType": {
 				"type": "void"
-			}
+			},
+			"group": "Listeners"
 		},
 		{
 			"name": "OnHudClicked_Unregister",
@@ -207,25 +220,13 @@
 					"type": "function",
 					"ref": false,
 					"description": "The exact callback reference passed to OnHudClicked_Register.",
-					"prototype": {
-						"name": "OnHudClickedCallback",
-						"funcName": "OnHudClickedCallback",
-						"description": "A hud button click.",
-						"paramTypes": [
-							{ "name": "playerSlot", "type": "int32", "description": "Slot of the player who clicked." },
-							{ "name": "name", "type": "string", "description": "Hud name passed to CreateCustomHud." },
-							{ "name": "buttonId", "type": "string", "description": "The id attribute of the clicked button in the layout." }
-						],
-						"retType": {
-							"type": "void",
-							"description": ""
-						}
-					}
+					"prototype": "OnHudClickedCallback"
 				}
 			],
 			"retType": {
 				"type": "void"
-			}
+			},
+			"group": "Listeners"
 		}
 	]
 }
