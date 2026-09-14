@@ -19,18 +19,22 @@
 ## Использование
 
 ```js
-// Из любого плагина на Plugify:
-CreateCustomHud('main_hud', 'panorama/layout/custom_game/main_hud.vxml');
+// Из любого плагина на Plugify. Всё ниже требует cs_script, поэтому всё
+// внутри OnCsScriptReady_Register — если он уже готов, сработает сразу.
+OnCsScriptReady_Register(() => {
+	CreateCustomHud('main_hud', 'panorama/layout/custom_game/main_hud.vxml');
 
-// Панель на клиенте появляется не сразу - вызовите хотя бы один
-// Set*-метод, прежде чем ждать, что игрок её увидит:
-SetHudHasClass('main_hud', 'dialog', 'Dismissed', false);
+	// Панель на клиенте появляется не сразу - вызовите хотя бы один
+	// Set*-метод, прежде чем ждать, что игрок её увидит:
+	SetHudHasClass('main_hud', 'dialog', 'Dismissed', false);
 
-// Значение для одного игрока перекрывает общее:
-SetHudHasClassForPlayer('main_hud', playerSlot, 'dialog', 'Dismissed', true);
+	// Значение для одного игрока перекрывает общее:
+	SetHudHasClassForPlayer('main_hud', playerSlot, 'dialog', 'Dismissed', true);
 
-// Дать игроку кликать по кнопкам худа:
-SetHudInputCapture('main_hud', playerSlot, true);
+	// Дать игроку кликать по кнопкам худа:
+	SetHudInputCapture('main_hud', playerSlot, true);
+});
+
 OnHudClicked_Register((playerSlot, hudName, buttonId) => {
 	// обработка клика
 });
@@ -40,6 +44,8 @@ OnHudClicked_Register((playerSlot, hudName, buttonId) => {
 | Метод | Описание |
 |---|---|
 | `IsCsScriptReady()` | Готов ли `cs_script`. |
+| `OnCsScriptReady_Register(callback)` | Подписка на готовность `cs_script`. Если он уже готов — сработает сразу при регистрации. |
+| `OnCsScriptReady_Unregister(callback)` | Отписка. |
 | `CreateCustomHud(name, layoutResource)` | Создаёт худ. |
 | `RemoveCustomHud(name)` | Удаляет худ. |
 | `HideCustomHudFromOtherPlayers(name, playerSlot)` | Прячет худ от всех, кроме `playerSlot`. |

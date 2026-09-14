@@ -17,18 +17,22 @@ This plugin takes care of that for you: it creates the hud through `s2sdk`, trac
 ## Usage
 
 ```js
-// From any Plugify plugin:
-CreateCustomHud('main_hud', 'panorama/layout/custom_game/main_hud.vxml');
+// From any Plugify plugin. Everything below needs cs_script, so it all
+// waits for OnCsScriptReady_Register — it fires immediately if already ready.
+OnCsScriptReady_Register(() => {
+	CreateCustomHud('main_hud', 'panorama/layout/custom_game/main_hud.vxml');
 
-// The panel doesn't appear right away. Call at least one Set* method
-// before expecting a player to see it:
-SetHudHasClass('main_hud', 'dialog', 'Dismissed', false);
+	// The panel doesn't appear right away. Call at least one Set* method
+	// before expecting a player to see it:
+	SetHudHasClass('main_hud', 'dialog', 'Dismissed', false);
 
-// A per-player value overrides the shared one:
-SetHudHasClassForPlayer('main_hud', playerSlot, 'dialog', 'Dismissed', true);
+	// A per-player value overrides the shared one:
+	SetHudHasClassForPlayer('main_hud', playerSlot, 'dialog', 'Dismissed', true);
 
-// Let a player click buttons on the hud:
-SetHudInputCapture('main_hud', playerSlot, true);
+	// Let a player click buttons on the hud:
+	SetHudInputCapture('main_hud', playerSlot, true);
+});
+
 OnHudClicked_Register((playerSlot, hudName, buttonId) => {
 	// handle click
 });
@@ -38,6 +42,8 @@ OnHudClicked_Register((playerSlot, hudName, buttonId) => {
 | Method | Description |
 |---|---|
 | `IsCsScriptReady()` | Whether `cs_script` is ready. |
+| `OnCsScriptReady_Register(callback)` | Subscribes to `cs_script` becoming ready. Fires immediately if it already is. |
+| `OnCsScriptReady_Unregister(callback)` | Unsubscribes. |
 | `CreateCustomHud(name, layoutResource)` | Creates a hud. |
 | `RemoveCustomHud(name)` | Removes a hud. |
 | `HideCustomHudFromOtherPlayers(name, playerSlot)` | Hides the hud from everyone except `playerSlot`. |
