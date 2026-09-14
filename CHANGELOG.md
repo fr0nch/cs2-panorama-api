@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/fr0nch/cs2-panorama-api/compare/v0.2.2...v0.3.0) (2026-09-14)
+
+
+### Features
+
+* add OnCsScriptReady listener ([e70151c](https://github.com/fr0nch/cs2-panorama-api/commit/e70151c000a1cc31a7265d505b5d7093785772c9))
+
 ## [0.2.2](https://github.com/fr0nch/cs2-panorama-api/compare/v0.2.1...v0.2.2) (2026-09-10)
 
 
