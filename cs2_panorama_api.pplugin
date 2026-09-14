@@ -16,6 +16,15 @@
 	],
 	"prototypes": [
 		{
+			"name": "OnCsScriptReadyCallback",
+			"funcName": "OnCsScriptReadyCallback",
+			"description": "CS Script has come up and is ready to use.",
+			"paramTypes": [],
+			"retType": {
+				"type": "void"
+			}
+		},
+		{
 			"name": "OnHudClickedCallback",
 			"funcName": "OnHudClickedCallback",
 			"description": "A hud button click. Called when a button in a CustomHudLayout is clicked.",
@@ -52,6 +61,42 @@
 				"description": "True if Instance is available."
 			},
 			"group": "CustomHudLayout"
+		},
+		{
+			"name": "OnCsScriptReady_Register",
+			"description": "Subscribes a callback to be called every time CS Script comes up (once per map, since it has to reconnect after every map change). If CS Script is already ready at the time of registration, the callback fires immediately.",
+			"funcName": "OnCsScriptReady_Register",
+			"paramTypes": [
+				{
+					"name": "callback",
+					"type": "function",
+					"ref": false,
+					"description": "Called when CS Script is ready.",
+					"prototype": "OnCsScriptReadyCallback"
+				}
+			],
+			"retType": {
+				"type": "void"
+			},
+			"group": "Listeners"
+		},
+		{
+			"name": "OnCsScriptReady_Unregister",
+			"description": "Removes a callback previously added with OnCsScriptReady_Register.",
+			"funcName": "OnCsScriptReady_Unregister",
+			"paramTypes": [
+				{
+					"name": "callback",
+					"type": "function",
+					"ref": false,
+					"description": "The exact callback reference passed to OnCsScriptReady_Register.",
+					"prototype": "OnCsScriptReadyCallback"
+				}
+			],
+			"retType": {
+				"type": "void"
+			},
+			"group": "Listeners"
 		},
 		{
 			"name": "CreateCustomHud",

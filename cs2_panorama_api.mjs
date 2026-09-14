@@ -7,6 +7,7 @@ let scriptReady = false;
 let csScript = null;
 const huds = new Map(); // name -> entityHandle (s2sdk)
 const hudClickListeners = new Set();
+const csScriptReadyListeners = new Set();
 let hudClicksHooked = false;
 
 function instance() {
@@ -20,6 +21,10 @@ function importCsScript() {
 			scriptReady = true;
 			console.log(`[${pluginTag}] CS Script connected successfully.`);
 			hookHudClicks();
+
+			for (const callback of csScriptReadyListeners) {
+				callback();
+			}
 		})
 		.catch((err) => {
 			console.log(`[${pluginTag}] CS Script isn't available: ${err}`);
@@ -104,6 +109,24 @@ const hudGetter = (methodName, fallback) => (name, ...args) => {
  * connected to it.
  */
 export const IsCsScriptReady = () => scriptReady;
+
+/**
+ * Subscribes a callback to be called every time CS Script comes up (once per
+ * map, since it has to reconnect after every map change). If CS Script is
+ * already ready at the time of registration, the callback fires immediately.
+ */
+export const OnCsScriptReady_Register = (callback) => {
+	csScriptReadyListeners.add(callback);
+
+	if (scriptReady) {
+		callback();
+	}
+};
+
+/** Removes a callback previously added with OnCsScriptReady_Register. */
+export const OnCsScriptReady_Unregister = (callback) => {
+	csScriptReadyListeners.delete(callback);
+};
 
 /**
  * CreateCustomHud only creates the entity — the panel isn't built on the
